@@ -1,4 +1,7 @@
 'use strict';
+const optArticleSelector = '.post',
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles';
 
 function titleClickHandler(event){
     event.preventDefault();
@@ -41,45 +44,43 @@ function titleClickHandler(event){
 
 }
 
-const links = document.querySelectorAll('.titles a');
-
-for(let link of links){
-  link.addEventListener('click', titleClickHandler);
-}
-
 
 //next script
 
 
-const optArticleSelector = '.post',
-  optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles';
-
+//next script
 function generateTitleLinks(){
 
   /*[DONE] remove contents of titleList */
-
   const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
 
   /*[IN PROGRESS] for each article */
-
-  const articles = document.querySelectorAll(optArticleSelector);
-
-  for(let article of articles);
+  const articles = document.querySelectorAll(optArticleSelector); //[aricle1, article2, article3, article4]
+  for(let article of articles) {
 
     /*[DONE] get the article id */
-
-  const articleId = document.querySelector(id)
-
+    const articleId = article.getAttribute("id"); //#article-3
     /*[DONE] find the title element */
 
-    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
-
-    /* get the title from the title element */
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML;//Article 3
 
     /* create HTML of the link */
+    const link = '<li><a href="#' + articleId + '">' + articleTitle + '</a></li>';//<li><a href="#article-3">Article 3</a></li>
 
     /* insert link into titleList */
+    titleList.innerHTML += link; //<li><a href="#article-1">Article 1</a></li><li><a href="#article-2">Article 2</a></li>li><a href="#article-3">Article 3</a></li>
+  }
 
+  const links = document.querySelectorAll('.titles a');
+  console.log(links)
+  for(let link of links){
+    link.addEventListener('click', titleClickHandler);
+  }
 }
+
+generateTitleLinks();
+
+
+
+
