@@ -125,10 +125,9 @@ function generateTags(){
   /*[DONE] END LOOP: for every article: */
   }
 }
+generateTags();
 
 //next script
-
-generateTags();
 
 function tagClickHandler(event){
   /*[DONE] prevent default action for this event */
@@ -172,13 +171,18 @@ function tagClickHandler(event){
 }
 
 function addClickListenersToTags(){
+
   /* find all links to tags */
+  const allTagsLinks = document.querySelectorAll('a[href^="#tag-"]');
 
   /* START LOOP: for each link */
+  for (let allTagsLink of allTagsLinks){
 
     /* add tagClickHandler as event listener for that link */
+    allTagsLink.addEventListener('click', tagClickHandler);
 
   /* END LOOP: for each link */
+  }
 }
 
 addClickListenersToTags();
