@@ -162,9 +162,6 @@ function generateTags() {
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector(optTagsListSelector);
 
-  /* [NEW] add html from allTags to tagList */
-  //tagList.innerHTML = allTags.join(' ');
-  /* create varaible for all links HTML code */
   const tagsParams = calculateTagsParams(allTags)
   console.log(tagsParams)
 
@@ -238,9 +235,16 @@ addClickListenersToTags();
 //authors
 
 const optArticleAuthorSelector = '.post .post-author';
+const  optAuthorsListSelector = '.list.authors';
+
+
 
 function generateAuthors() {
-  /* find all articles DRY??? */
+
+  /* [NEW] create a new variable allAuthors with an empty object */
+  let allAuthors = {};
+
+  /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
   /* START LOOP: for every article: */
@@ -258,7 +262,25 @@ function generateAuthors() {
     authorsWrapper.innerHTML = authorLinkHtml;
 
     /*END LOOP: for every article: */
+    if(!allAuthors[articleAuthor]){
+      allAuthors[articleAuthor] = 1;
+    } else {
+      allAuthors[articleAuthor]++;
+    }
   }
+
+  /* [NEW] find list of authors in right column */
+  const authorsList = document.querySelector(optAuthorsListSelector);
+
+   /* [NEW] create variable for all links HTML code */
+   let authorsListHTML = '';
+
+   /* [NEW] START LOOP: for each author in authorsList */
+   for(let author in allAuthors){
+    authorsListHTML = '<li><a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ')</span></a></li>';
+
+   }
+   authorsList.innerHTML = authorsListHTML;
 }
 
 generateAuthors();
