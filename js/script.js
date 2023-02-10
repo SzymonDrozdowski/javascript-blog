@@ -261,12 +261,13 @@ function generateAuthors() {
     /* insert HTML of all the links into the tags wrapper */
     authorsWrapper.innerHTML = authorLinkHtml;
 
-    /*END LOOP: for every article: */
+
     if(!allAuthors[articleAuthor]){
       allAuthors[articleAuthor] = 1;
     } else {
       allAuthors[articleAuthor]++;
     }
+    /*END LOOP: for every article: */
   }
 
   /* [NEW] find list of authors in right column */
@@ -277,7 +278,9 @@ function generateAuthors() {
 
    /* [NEW] START LOOP: for each author in authorsList */
    for(let author in allAuthors){
-    authorsListHTML = '<li><a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ')</span></a></li>';
+    const authorsLinkHTML = '<li><a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ')</span></a></li>';
+    authorsListHTML += authorsLinkHTML
+    console.log(allAuthors)
 
    }
    authorsList.innerHTML = authorsListHTML;
